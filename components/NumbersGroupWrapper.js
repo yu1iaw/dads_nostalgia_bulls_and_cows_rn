@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { NumbersGroup } from "./NumbersGroup";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import colors from "../config/colors";

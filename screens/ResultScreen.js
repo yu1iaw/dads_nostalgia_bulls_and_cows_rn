@@ -1,21 +1,44 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { StyleSheet, ImageBackground } from "react-native";
 import { CustomButton } from "../components/CustomButton";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export function ResultScreen({navigation, route}) {
-    const digit = route.params.initial;
+    const {initial} = route.params;
+    const history = useSelector(state => state.memorise.items);
+
+
+    useEffect(() => {
+		const saveHistory = async () => {
+			try {
+				await AsyncStorage.setItem('history', JSON.stringify(history));
+			} catch(e) {
+				console.log(e);
+			} 
+		}
+		saveHistory();
+	}, [initial])
 
     useEffect(() => {
         navigation.setOptions({
-            title: digit,
+            title: initial,
             headerLeft: ({tintColor}) => 
-            <FontAwesome 
-              name="mail-reply" 
-              size={24} 
-              color={tintColor} 
-              onPress={() => navigation.goBack()}
-            />
+                <FontAwesome 
+                    name="mail-reply" 
+                    size={24} 
+                    color={tintColor} 
+                    onPress={() => navigation.goBack()}
+                />,
+            headerRight: ({tintColor}) => 
+                <Ionicons 
+                    name="stats-chart-sharp" 
+                    size={24} 
+                    color={tintColor} 
+                    onPress={() => navigation.replace("StatScreen")}
+                />,
         })
     }, [])
 
@@ -31,6 +54,6 @@ export function ResultScreen({navigation, route}) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     }
 })

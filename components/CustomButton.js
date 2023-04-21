@@ -8,7 +8,7 @@ export function CustomButton({disabled, onPress, children, positioned, barrier})
             disabled={disabled} 
             onPress={onPress}
         >
-            <Text style={styles.text}>{children}</Text>
+            <Text style={[styles.text, positioned && {color: colors.lightSecondary, fontSize: 17}]}>{children}</Text>
         </Pressable>
     )
 }
@@ -40,10 +40,12 @@ const styles = StyleSheet.create({
         borderColor: colors.lightSecondary
     },
     positioned: {
-        width: 100,
+        width: 120,
+        backgroundColor: colors.darkPrimary,
+        borderColor: colors.lightSecondary,
         position: "absolute",
-        top: deviceHeight > 592 ? deviceHeight / 2.8 : deviceHeight / 2.6,
-        right: Dimensions.get("screen").width / 2 - 45,
+        top: deviceHeight > 640 ? deviceHeight / 1.68 : deviceHeight > 592 ? deviceHeight / 1.92 : deviceHeight / 2.1,
+        right: Dimensions.get("screen").width / 2 - 60,
         zIndex: 20
     },
     alt_positioned: {

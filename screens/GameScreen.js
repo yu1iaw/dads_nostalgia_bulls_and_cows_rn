@@ -1,5 +1,6 @@
 import { StyleSheet, View, ScrollView, Alert, Keyboard, Dimensions } from "react-native";
 import { useState, useMemo, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { FontAwesome } from "@expo/vector-icons";
 import { Input } from "../components/Input";
 import { ScrollableResults } from "../components/ScrollableResults";
@@ -8,6 +9,22 @@ import { NumbersGroupWrapper } from "../components/NumbersGroupWrapper";
 import { AppearingButton } from "../components/AppearingButton";
 import { Greeting } from "../components/Greeting";
 import { Loading } from "../components/Loading";
+import { addMemoItem, saveMemo } from '../store/historySlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+function loadData() {
+	return async dispatch => {
+		try {
+			const historyString = await AsyncStorage.getItem('history');
+			if (historyString !== null) {
+				const history = JSON.parse(historyString);
+				dispatch(saveMemo({items: history}));
+			}
+		} catch(e) {
+			console.log(e);
+		}
+	}
+}
 
 function generator() {
 	let atAll = "0123456789";
@@ -36,6 +53,7 @@ function guessNumber(num, count) {
 	return `${bulls} ${bulls > 1 ? 'бика' : bulls == 1 ? 'бик' : 'биків'}, ${cows} ${cows > 1 ? 'корови' : cows == 1 ? 'корова' : 'корів'}`;
 }
 
+
 export function GameScreen({ navigation, route }) {
 	const [mode, setMode] = useState(true);
 	const initial = useMemo(() => generator(), [mode]);
@@ -45,8 +63,13 @@ export function GameScreen({ navigation, route }) {
 	const [keyBoard, setKeyBoard] = useState(false);
 	const [greet, setGreet] = useState(null);
 	const guessLength = guess.length;
-	
+	const dispatch = useDispatch();
 
+	useEffect(() => {
+		dispatch(loadData());
+	}, [dispatch])
+
+	
 	const submit = () => {
 		if (value.split('').find(dig => value.indexOf(dig) !== value.lastIndexOf(dig)) || !value) {
 			Alert.alert('Не допускаються однакові цифри', "...або намагаєшся ввести порожнє значення!", [{text: "Святий Ґрааль!", style: "cancel", onPress: () => setValue("")}]);
@@ -60,6 +83,7 @@ export function GameScreen({ navigation, route }) {
 		setGuess((curr) => [newGuess, ...curr]);
 		setValue("");
 		if (newGuess.res.includes("4 бика")) {
+			dispatch(addMemoItem({item: guessLength + 1}));
 			setMode((mode) => !mode);
 			navigation.navigate("ResultScreen", { initial: count });
 			navigation.setParams({ nav: true });
@@ -121,7 +145,7 @@ export function GameScreen({ navigation, route }) {
 		}
 	}, [guessLength, route.params]);
 
-	// console.log(count);
+
 
 	return (
 		<View style={styles.container}>
@@ -129,7 +153,7 @@ export function GameScreen({ navigation, route }) {
 			{greet}
 			<AppearingButton guess={guess} onPress={restart} positioned />
 			<View 
-				style={{...styles.scrollContainer, height: deviceHeight > 592 ? 255 : 209}}>
+				style={{...styles.scrollContainer, height: deviceHeight > 640 ? 360: deviceHeight > 592 ? 255 : 209}}>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					{guess.map((item, i) => {
 						return (

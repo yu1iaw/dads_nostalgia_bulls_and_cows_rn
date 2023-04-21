@@ -1,4 +1,5 @@
 import { ScrollView, StyleSheet, Text } from "react-native";
+import colors from "../config/colors";
 
 export function ScrollableNumbers() {
     return (
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 46,
         fontWeight: "bold",
-        color: "floralwhite",
+        color: colors.lightPrimary,
         paddingVertical: 6
     }
 })

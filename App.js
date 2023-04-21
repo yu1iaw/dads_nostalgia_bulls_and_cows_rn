@@ -5,10 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GameScreen } from "./screens/GameScreen";
 import { ResultScreen } from "./screens/ResultScreen";
+import { StatScreen } from "./screens/StatScreen";
 
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import colors from './config/colors';
+import colors from "./config/colors";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -24,7 +27,7 @@ export default function App() {
 					IBM: require("./assets/fonts/IBMPlexMono-Regular.ttf"),
 					IBM_bold: require("./assets/fonts/IBMPlexMono-Bold.ttf"),
 					playfair: require("./assets/fonts/PlayfairDisplay-Medium.ttf"),
-					caveat_semi: require("./assets/fonts/Caveat-SemiBold.ttf")
+					caveat_semi: require("./assets/fonts/Caveat-SemiBold.ttf"),
 				});
 			} catch (e) {
 				console.log(e.message);
@@ -35,7 +38,7 @@ export default function App() {
 		prepare();
 	}, []);
 
-	const onLayout = useCallback(async() => {
+	const onLayout = useCallback(async () => {
 		if (AppIsLoaded) {
 			await SplashScreen.hideAsync();
 		}
@@ -43,45 +46,52 @@ export default function App() {
 
 	if (!AppIsLoaded) return null;
 
-
 	return (
-		<>
+		<Provider store={store}>
 			<StatusBar style="dark" />
 			<NavigationContainer>
-				<View onLayout={onLayout} style={{flex: 1}}>
-					<Stack.Navigator 
+				<View onLayout={onLayout} style={{ flex: 1 }}>
+					<Stack.Navigator
 						screenOptions={{
-							headerTitleAlign: "center",  
-							headerTintColor: colors.lightPrimary, 
-							contentStyle: {backgroundColor: colors.darkSecondary},
-							headerStyle: {backgroundColor: colors.darkPrimary}
-						}}
-					>
-						<Stack.Screen 
-							name="MainScreen" 
+							headerTitleAlign: "center",
+							headerTintColor: colors.lightPrimary,
+							contentStyle: { backgroundColor: colors.darkSecondary },
+							headerStyle: { backgroundColor: colors.darkPrimary },
+						}}>
+						<Stack.Screen
+							name="MainScreen"
 							component={GameScreen}
 							options={{
 								title: "Бики і Корови",
 								headerTitleStyle: {
 									fontFamily: "IBM_bold",
 									fontSize: 27,
-								}
-							}} 
+								},
+							}}
 						/>
-						<Stack.Screen 
-							name="ResultScreen" 
+						<Stack.Screen
+							name="ResultScreen"
 							component={ResultScreen}
 							options={{
 								headerTitleStyle: {
 									fontFamily: "IBM_bold",
-									fontSize: 35
-								}
-							}} 
+									fontSize: 35,
+								},
+							}}
+						/>
+						<Stack.Screen
+							name="StatScreen"
+							component={StatScreen}
+							options={{
+								headerTitleStyle: {
+									fontFamily: "IBM_bold",
+									fontSize: 30,
+								},
+							}}
 						/>
 					</Stack.Navigator>
 				</View>
 			</NavigationContainer>
-		</>
+		</Provider>
 	);
 }
-

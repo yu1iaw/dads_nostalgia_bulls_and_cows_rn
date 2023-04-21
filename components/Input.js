@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { CustomButton } from "./CustomButton";
+import colors from "../config/colors";
 
 export function Input({onChangeHandler, disabled, onPress}) {
     const [value, setValue] = useState('');
@@ -21,7 +22,7 @@ export function Input({onChangeHandler, disabled, onPress}) {
                 maxLength={4}
                 placeholder="1234"
                 disableFullscreenUI={true}
-                style={styles.input} 
+                style={[styles.input, disabled && styles.disabled]} 
                 value={value} 
                 onChangeText={(text) => setValue(text)} 
             />
@@ -41,13 +42,16 @@ const styles = StyleSheet.create({
         width: 150,
         height: 50,
         marginRight: 20,
-        borderColor: "white",
+        borderColor: colors.lightSecondary,
         borderWidth: 3,
-        backgroundColor: "chocolate",
+        backgroundColor: colors.darkPrimary,
         borderRadius: 5,
         paddingHorizontal: 10,
         fontSize: 20,
         fontFamily: "IBM",
-        color: "white"
+        color: colors.lightSecondary
+    },
+    disabled: {
+        backgroundColor: colors.gray100
     }
 })

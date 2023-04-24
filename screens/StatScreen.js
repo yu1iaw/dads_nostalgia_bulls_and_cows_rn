@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Stat } from "../components/Stat";
 import { saveMemo } from "../store/historySlice";
@@ -39,14 +39,20 @@ export function StatScreen({ navigation }) {
         })
 	}, []);
 
-	const deleteHistory = useCallback(async () => {
-		try {
-			await AsyncStorage.removeItem('history');
-			dispatch(saveMemo({items: {}}));
-			navigation.goBack();
-		} catch(e) {
-			console.log(e);
-		}
+	const deleteHistory = useCallback(() => {
+		Alert.alert('Видалити статистику?', '', [
+			{ text: "Скасувати", style: "cancel"},
+			{ text: "Видалити", style: "default", onPress: async () => {
+				try {
+					await AsyncStorage.removeItem('history');
+					dispatch(saveMemo({items: {}}));
+					navigation.goBack();
+				} catch(e) {
+					console.log(e);
+				}
+			}},
+			
+		])
 	}, [dispatch])
 
 	return (

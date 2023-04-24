@@ -7,7 +7,7 @@
     "icon": "./assets/favicon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/bull-terrier.png",
+      "image": "./assets/home.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFDAB9"
     },

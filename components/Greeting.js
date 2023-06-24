@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, Dimensions } from "react-native"
 import colors from "../config/colors"
 
 export function Greeting() {
@@ -13,18 +13,20 @@ export function Greeting() {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 16,
+        paddingVertical: deviceHeight > 915 ? 50 : 16,
         paddingHorizontal: 10,
         alignItems: "center"
     },
     text: {
         fontFamily: "caveat_semi",
-        fontSize: 22
+        fontSize: deviceHeight > 915 ? 30 : 22
     },
     accent: {
-        fontSize: 26,
+        fontSize: deviceHeight > 915 ? 36 : 26,
         color: colors.darkPrimary
     }
 })

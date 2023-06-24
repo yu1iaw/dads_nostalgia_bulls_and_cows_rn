@@ -1,4 +1,5 @@
 export default {
+    header: "#590099",
     darkPrimary: "chocolate",
     darkSecondary: "#FFDAB9",
     lightPrimary: "floralwhite",

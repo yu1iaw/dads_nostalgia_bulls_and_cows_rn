@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Dimensions } from "react-native";
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Stat } from "../components/Stat";
 import { saveMemo } from "../store/historySlice";
@@ -65,11 +65,13 @@ export function StatScreen({ navigation }) {
 	);
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
 	container: {
-		alignItems: "center"
+		alignItems: deviceHeight > 915 ? "flex-start" : "center"
 	},
 	barContainer: {
-		padding: 20
+		padding: deviceHeight > 915 ? 40 : 20
 	}
 })

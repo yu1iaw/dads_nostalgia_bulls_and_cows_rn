@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Dimensions } from "react-native";
 import { CustomButton } from "./CustomButton";
 import colors from "../config/colors";
 
@@ -31,23 +31,25 @@ export function Input({onChangeHandler, disabled, onPress}) {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        paddingVertical: 15
+        paddingVertical: deviceHeight > 915 ? 30 : 15
     },
     input: {
-        width: 150,
-        height: 50,
+        width: deviceHeight > 915 ? 300 : 150,
+        height: deviceHeight > 915 ? 80 : 50,
         marginRight: 20,
         borderColor: colors.lightSecondary,
         borderWidth: 3,
         backgroundColor: colors.darkPrimary,
         borderRadius: 5,
         paddingHorizontal: 10,
-        fontSize: 20,
+        fontSize: deviceHeight > 915 ? 28 : 20,
         fontFamily: "IBM",
         color: colors.lightSecondary
     },

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, Text } from "react-native";
 import colors from "../config/colors";
 
 export function ScrollableNumbers() {
@@ -12,17 +12,19 @@ export function ScrollableNumbers() {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        paddingBottom: 4,
+        paddingBottom: deviceHeight > 915 ? 6 : 4,
         overflow: "hidden"
     },
     text: {
-        fontSize: 46,
+        fontSize: deviceHeight > 915 ? 69 : 46,
         fontWeight: "bold",
         color: colors.lightPrimary,
-        paddingVertical: 6
+        paddingVertical: deviceHeight > 915 ? 30: 6
     }
 })

@@ -153,7 +153,7 @@ export function GameScreen({ navigation, route }) {
 			{greet}
 			<AppearingButton guess={guess} onPress={restart} positioned />
 			<View 
-				style={{...styles.scrollContainer, height: deviceHeight > 640 ? 360: deviceHeight > 592 ? 255 : 209}}>
+				style={{...styles.scrollContainer, height: deviceHeight > 915 ? 630 : deviceHeight > 640 ? 360: deviceHeight > 592 ? 255 : 209}}>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					{guess.map((item, i) => {
 						return (

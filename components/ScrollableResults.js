@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import colors from "../config/colors";
 
 export function ScrollableResults({attempt, number, hints}) {
@@ -8,6 +8,8 @@ export function ScrollableResults({attempt, number, hints}) {
         </View>
     )
 }
+
+const deviceHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     container: {
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
     text: {
         width: "100%",
         // fontFamily: "playfair",
-        fontSize: 18,
+        fontSize: deviceHeight > 915 ? 21 : 18,
         paddingVertical: 5,
         paddingHorizontal: 10,
         marginVertical: 5,
@@ -28,6 +30,6 @@ const styles = StyleSheet.create({
     innerText: {
         color: colors.lightPrimary,
         fontFamily: "IBM",
-        fontSize: 19
+        fontSize: deviceHeight > 915 ? 23 : 19
     }
 })

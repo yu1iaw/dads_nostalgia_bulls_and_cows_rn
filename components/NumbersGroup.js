@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { Number } from "./Number";
 
 export function NumbersGroup() {
@@ -10,10 +10,13 @@ export function NumbersGroup() {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
-        marginTop: 5,
+        marginTop: deviceHeight > 915 ? 15 : 5,
+        marginBottom: deviceHeight > 915 ? 15 : 0,
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent:  deviceHeight > 915 ? "space-around" : "space-between",
     }
 })

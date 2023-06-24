@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { ScrollableNumbers } from "./ScrollableNumbers";
 import colors from "../config/colors";
 
@@ -16,9 +16,11 @@ export function ScrollableNumbersGroup({opacity}) {
 	);
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
-        height: 77, 
+        height: deviceHeight > 915 ? 160 : 77, 
         flexDirection: "row", 
         backgroundColor: colors.darkPrimary,
         overflow: "hidden"

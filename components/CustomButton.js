@@ -17,8 +17,8 @@ const deviceHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     container: {
-        width: 110,
-        height: 50,
+        width: deviceHeight > 915 ? 150 : 110,
+        height: deviceHeight > 915 ? 80 : 50,
         backgroundColor: colors.lightSecondary,
         justifyContent: "center",
         borderColor: colors.darkPrimary,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: colors.darkPrimary,
         fontFamily: "IBM_bold",
-        fontSize: 15
+        fontSize: deviceHeight > 915 ? 19 : 15
     },
     pressed: {
         backgroundColor: colors.gray100
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         borderColor: colors.lightSecondary
     },
     positioned: {
-        width: 120,
+        width: deviceHeight > 915 ? 150 : 120,
         backgroundColor: colors.darkPrimary,
         borderColor: colors.lightSecondary,
         position: "absolute",
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         zIndex: 20
     },
     alt_positioned: {
-        width: 140,
+        width: deviceHeight > 915 ? 190 : 140,
         top: deviceHeight / 1.7,
         left: Dimensions.get("screen").width / 12
     }

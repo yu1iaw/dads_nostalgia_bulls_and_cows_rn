@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Dimensions, Pressable, StyleSheet, Text } from "react-native";
 import { useRoute } from '@react-navigation/native';
 import colors from "../config/colors";
 
@@ -39,15 +39,17 @@ export function Number({text}) {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
         position: "relative",
-        width: 34,
+        width: deviceHeight > 915 ? 50 : 34,
         height: 50,
         alignItems: "center"
     },
     text: {
-        fontSize: 32,
+        fontSize: deviceHeight > 915 ? 45 : 32,
         color: colors.gray500
     },
     hiddenText: {
@@ -55,14 +57,14 @@ const styles = StyleSheet.create({
     },
     visibleCross: {
         position: "absolute",
-        right: "11%",
-        top: "-15%",
-        fontSize: 42,
+        right: deviceHeight > 915 ? "17%" : "11%",
+        top: deviceHeight > 915 ? "-8%" : "-15%",
+        fontSize: deviceHeight > 915 ? 50 : 42,
     },
     visibleNull: {
         position: "absolute",
-        top: "-30%",
-        right: "4%",
-        fontSize: 54,
+        top: deviceHeight > 915 ? "-34%" : "-30%",
+        right: deviceHeight > 915 ? "1%" : "4%",
+        fontSize: deviceHeight > 915 ? 70 : 54,
     }
 })

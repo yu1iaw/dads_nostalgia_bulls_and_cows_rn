@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import colors from "../config/colors";
 
 export function Stat({item, amount}) {
@@ -23,6 +23,8 @@ export function Stat({item, amount}) {
     )
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
@@ -30,30 +32,31 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
     },
     textContainer: {
-        width: 90
+        width: deviceHeight > 915 ? 120 :  90
     },
     text: {
         fontFamily: "caveat_semi",
-        fontSize: 21
+        fontSize: deviceHeight > 915 ? 30 : 21
     },
     progressBarContainer: {
         flexDirection: "row",
-        alignItems: "flex-end"
+        alignItems: deviceHeight > 915 ? "stretch" : "flex-end"
     },
     innerBarContainer: {
-        width: 200,
+        width: deviceHeight > 915 ? 500 : 200,
         backgroundColor: colors.lightPrimary
     },
     progressBar: {
-        backgroundColor: colors.darkPrimary
+        backgroundColor: colors.darkPrimary,
+        flex: deviceHeight > 915 ? 1 : 0
     },
     amountContainer: {
-        width: 56,
+        width: deviceHeight > 915 ? 100 : 56,
         alignItems: "center",
         marginLeft: 4
     },
     amount: {
         fontFamily: "IBM",
-        fontSize: 15
+        fontSize: deviceHeight > 915 ? 20 : 15
     }
 })

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useCallback, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, Alert, Dimensions } from "react-native";
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function StatScreen({ navigation }) {
 	const dispatch = useDispatch();
+	const { engLang } = useSelector(state => state.switches);
 	const saved = useSelector(state => state.memorise.items);
 	const savedArr = [];
 	for (const [key, value] of Object.entries(saved)) {
@@ -19,9 +20,9 @@ export function StatScreen({ navigation }) {
 	const amount = savedArr.reduce((acc, curr) => acc + curr.quantity, 0);
 
 
-	useEffect(() => {
+	useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Статистика',
+            title: engLang ? 'Statistics' : 'Статистика',
             headerLeft: ({tintColor}) => 
                 <FontAwesome
                     name="fort-awesome" 
@@ -40,9 +41,9 @@ export function StatScreen({ navigation }) {
 	}, []);
 
 	const deleteHistory = useCallback(() => {
-		Alert.alert('Видалити статистику?', '', [
-			{ text: "Скасувати", style: "cancel"},
-			{ text: "Видалити", style: "default", onPress: async () => {
+		Alert.alert(engLang ? 'Clean up statistics?' : 'Видалити статистику?', '', [
+			{ text: engLang ? "No" : "Скасувати", style: "cancel"},
+			{ text: engLang ? "Yes" : "Видалити", style: "default", onPress: async () => {
 				try {
 					await AsyncStorage.removeItem('history');
 					dispatch(saveMemo({items: {}}));
@@ -58,7 +59,7 @@ export function StatScreen({ navigation }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.barContainer}>
-				{savedArr.map((item, i) => <Stat key={i} item={item} amount={amount} /> )}
+				{savedArr.map((item, i) => <Stat key={i} item={item} amount={amount} engLang={engLang} /> )}
 			</View>
 			{/* <CustomButton onPress={deleteHistory}>Очистити</CustomButton> */}
 		</View>

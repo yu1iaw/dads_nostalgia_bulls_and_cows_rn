@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
         fontSize: deviceHeight > 915 ? 69 : 46,
         fontWeight: "bold",
         color: colors.lightPrimary,
-        paddingVertical: deviceHeight > 915 ? 30: 6
+        paddingVertical: deviceHeight > 915 ? 30: 3
     }
 })

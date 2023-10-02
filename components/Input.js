@@ -3,7 +3,7 @@ import { View, TextInput, StyleSheet, Dimensions } from "react-native";
 import { CustomButton } from "./CustomButton";
 import colors from "../config/colors";
 
-export function Input({onChangeHandler, disabled, onPress}) {
+export function Input({onChangeHandler, disabled, onPress, engLang}) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export function Input({onChangeHandler, disabled, onPress}) {
                 value={value} 
                 onChangeText={(text) => setValue(text)} 
             />
-            <CustomButton disabled={disabled} onPress={updateValue}>Перевірити</CustomButton>
+            <CustomButton disabled={disabled} onPress={updateValue}>{engLang ? "Check Out" : "Перевірити"}</CustomButton>
 		</View>
     )
 }

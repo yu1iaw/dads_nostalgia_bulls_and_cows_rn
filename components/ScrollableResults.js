@@ -1,10 +1,10 @@
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import colors from "../config/colors";
 
-export function ScrollableResults({attempt, number, hints}) {
+export function ScrollableResults({attempt, number, hints, engLang}) {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Спроба {attempt} &#9658; <Text style={styles.innerText}>{number}</Text> &#9658;<Text> {hints}</Text></Text>
+            <Text style={styles.text}>{engLang ? "Attempt" : "Спроба"} {attempt} &#9658; <Text style={styles.innerText}>{number}</Text> &#9658;<Text> {hints}</Text></Text>
         </View>
     )
 }
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     text: {
         width: "100%",
         // fontFamily: "playfair",
-        fontSize: deviceHeight > 915 ? 21 : 18,
+        fontSize: deviceHeight > 915 ? 21 : 16,
         paddingVertical: 5,
         paddingHorizontal: 10,
         marginVertical: 5,

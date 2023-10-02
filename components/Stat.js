@@ -1,13 +1,18 @@
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import colors from "../config/colors";
 
-export function Stat({item, amount}) {
+export function Stat({item, amount, engLang}) {
     const width = Math.round(item.quantity * 100 / amount) + '%';
+    
+
+    const engLabel = `${item.quality  == 'moreThan10' ? '10+' : item.quality} ${item.quality.length > 2 ? '' : item.quality == 1 ? 'try' : 'tries'}`;
+    const ukrLabel = `${item.quality  == 'moreThan10' ? '10+' : item.quality} ${item.quality.length > 2 ? '' : item.quality == 1 ? 'спроба' : item.quality > 1 && item.quality < 5 ? 'спроби' : 'спроб'}`;
+    const attempts = engLang ? engLabel : ukrLabel;
 
     return (
         <View style={styles.container}>
-            <View style={styles.textContainer}>
-                <Text style={styles.text}>{item.quality  == 'moreThan10' ? '10+' : item.quality} {item.quality.length > 2 ? '' : item.quality == 1 ? 'спроба' : item.quality > 1 && item.quality < 5 ? 'спроби' : 'спроб'}</Text>
+            <View style={{...styles.textContainer,  paddingLeft: engLang ? 10 : 0}}>
+                <Text style={styles.text}>{attempts}</Text>
             </View>
             <View style={styles.progressBarContainer}>
                 <View style={styles.innerBarContainer}>

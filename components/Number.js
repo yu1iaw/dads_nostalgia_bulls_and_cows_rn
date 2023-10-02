@@ -44,7 +44,7 @@ const deviceHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
     container: {
         position: "relative",
-        width: deviceHeight > 915 ? 50 : 34,
+        width: deviceHeight > 915 ? 50 : 36,
         height: 50,
         alignItems: "center"
     },
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     },
     visibleNull: {
         position: "absolute",
-        top: deviceHeight > 915 ? "-34%" : "-30%",
-        right: deviceHeight > 915 ? "1%" : "4%",
-        fontSize: deviceHeight > 915 ? 70 : 54,
+        top: deviceHeight > 915 ? "-34%" : "-28%",
+        right: deviceHeight > 915 ? "1%" : "5%",
+        fontSize: deviceHeight > 915 ? 70 : 51,
     }
 })

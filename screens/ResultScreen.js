@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, ImageBackground } from "react-native";
 import { CustomButton } from "../components/CustomButton";
@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function ResultScreen({navigation, route}) {
     const {initial} = route.params;
     const history = useSelector(state => state.memorise.items);
+    const { engLang } = useSelector(state => state.switches);
 
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export function ResultScreen({navigation, route}) {
 		saveHistory();
 	}, [initial])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         navigation.setOptions({
             title: initial,
             headerLeft: ({tintColor}) => 
@@ -47,7 +48,7 @@ export function ResultScreen({navigation, route}) {
             source={require("../assets/rodeo-bull-riding.png")}
             resizeMode="contain"
             style={styles.container}>
-            <CustomButton onPress={() => navigation.navigate("MainScreen", {nav : false})} barrier>Грати знову</CustomButton>
+            <CustomButton onPress={() => navigation.navigate("MainScreen", {nav : false})} barrier>{engLang ? 'New Game' : 'Грати знову'}</CustomButton>
         </ImageBackground>
     )
 }

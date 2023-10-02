@@ -17,7 +17,7 @@ const deviceHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     container: {
-        width: deviceHeight > 915 ? 150 : 110,
+        width: deviceHeight > 915 ? 150 : 120,
         height: deviceHeight > 915 ? 80 : 50,
         backgroundColor: colors.lightSecondary,
         justifyContent: "center",
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
         borderColor: colors.lightSecondary
     },
     positioned: {
-        width: deviceHeight > 915 ? 150 : 120,
         backgroundColor: colors.darkPrimary,
         borderColor: colors.lightSecondary,
         position: "absolute",

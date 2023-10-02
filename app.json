@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "bulls-and-cows",
+    "name": "бикиІкорови",
     "slug": "bulls-and-cows",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/favicon.png",
+    "icon": "./assets/mind-games.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/home.png",
+      "image": "./assets/mind-games.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFDAB9"
     },

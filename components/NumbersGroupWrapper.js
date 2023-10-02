@@ -3,17 +3,17 @@ import { NumbersGroup } from "./NumbersGroup";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import colors from "../config/colors";
 
-export function NumbersGroupWrapper({opacity}) {
+export function NumbersGroupWrapper({opacity, engLang}) {
     const style = [styles.container];
     opacity && style.push(styles.opacity);
 
 	return (
 		<KeyboardAwareScrollView style={style}>
-			<Text style={styles.title}>ЗАПИСНИК</Text>
+			<Text style={styles.title}>{engLang ? 'NOTEBOOK' : 'ЗАПИСНИК'}</Text>
 			<NumbersGroup />
-            <Text style={styles.span}>*тап - викреслити цифру</Text>
-            <Text style={styles.span}>*довгий тап - обрати цифру</Text>
-            <Text style={styles.span}>*кодовий замок для злому числа &#8595;</Text>
+            <Text style={styles.span}>*{engLang ? 'tap - cross off a digit' : 'тап - викреслити цифру'}</Text>
+            <Text style={styles.span}>*{engLang ? 'long tap - choose a digit' : 'довгий тап - обрати цифру'}</Text>
+            <Text style={styles.span}>*{engLang ? `code lock to break the number` : 'кодовий замок для злому числа'} &#8595;</Text>
 		</KeyboardAwareScrollView>
 	);
 }

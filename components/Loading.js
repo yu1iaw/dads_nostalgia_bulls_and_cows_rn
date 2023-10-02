@@ -1,9 +1,18 @@
-import { Image, View } from "react-native";
+import { useEffect, useRef } from "react";
+import { View } from "react-native";
+import LottieView from "lottie-react-native";
 
 export function Loading() {
+    const animationRef = useRef(null);
+
+    setTimeout(() => {
+        animationRef.current?.play();
+    }, 100);
+
+
     return (
         <View style={{alignItems: "center", marginTop: 100}}>
-            <Image source={require('../assets/splash_screen.gif')} style={{width: 80, height: 80}}/>
+            <LottieView ref={animationRef} source={require('../assets/rubik.json')} style={{width: 150, height: 150}}/>
         </View>
     )
 }
